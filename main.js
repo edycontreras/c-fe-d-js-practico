@@ -3,28 +3,44 @@ const desktopMenu = document.querySelector(".desktop-menu")
 const mobileBurguerMenu = document.querySelector(".menu")
 const mobileMenu = document.querySelector(".mobile-menu")
 const shoppingCart = document.querySelector(".navbar-shopping-cart")
-const productDetail = document.querySelector(".product-detail")
+const shoppingCartContainer = document.querySelector("#shoppingCartContainer")
 const cardsContainer = document.querySelector(".cards-container")
-
+const productDetail = document.querySelector("#productDetail")
+const productDetailClose = document.querySelector(".product-detail-close")
 
 menuEmail.addEventListener("click", toggleDesktopMenu)
 mobileBurguerMenu.addEventListener("click", toggleMobileMenu)
 shoppingCart.addEventListener("click", toggleShoppingCart)
+productDetailClose.addEventListener("click", closeProductDetail)
 
 function toggleDesktopMenu() {
     desktopMenu.classList.toggle("inactive")
+    shoppingCartContainer.classList.add("inactive")
     productDetail.classList.add("inactive")
 }
 
 function toggleMobileMenu() {
     mobileMenu.classList.toggle("inactive")
+    shoppingCartContainer.classList.add("inactive")
     productDetail.classList.add("inactive")
 }
+
 function toggleShoppingCart() {
-    productDetail.classList.toggle("inactive")
+    shoppingCartContainer.classList.toggle("inactive")
     mobileMenu.classList.add("inactive")
     desktopMenu.classList.add("inactive")
+    productDetail.classList.add("inactive")
 }
+
+function openProductDetailAside(){
+    productDetail.classList.remove("inactive")
+    mobileMenu.classList.add("inactive")
+    shoppingCartContainer.classList.add("inactive")
+    desktopMenu.classList.add("inactive")
+}
+function closeProductDetail(){
+    productDetail.classList.add("inactive")
+    }
 
 const productList = []
 productList.push ({
@@ -80,6 +96,7 @@ function renderProducts(arr){
     
         const productImg = document.createElement("img")
         productImg.setAttribute("src", product.image)
+        productImg.addEventListener("click", openProductDetailAside)
     
         const productInfo = document.createElement("div")
         productInfo.classList.add("product-info")
